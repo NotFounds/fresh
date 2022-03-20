@@ -53,10 +53,6 @@ jobs:
         os: [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
-      - name: Debug
-        if: ${{ always() }}
-        uses: mxschmitt/action-tmate@v3
-
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -70,6 +66,10 @@ jobs:
 
       - name: Fresh Init
         run: fresh init foobar
+
+      - name: Debug
+        if: ${{ always() }}
+        uses: mxschmitt/action-tmate@v3
 
       - name: Check file generation & Move to there
         run: test -d foobar
