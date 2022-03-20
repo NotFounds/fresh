@@ -72,10 +72,8 @@ jobs:
         run: .github/scripts/check-generated-files.sh foobar
 
       - name: Start up the server & Access it
-        working-directory: ./foobar
-        run: |
-          ./main.ts &
-          curl localhost:8000 -o /dev/null -s
+        run: .github/scripts/check-server-startup.sh foobar
 
       - name: Type check main.ts
+        working-directory: ./foobar
         run: deno cache --no-check=remote main.ts
