@@ -69,7 +69,7 @@ jobs:
         run: fresh init foobar
 
       - name: Check file generation & Move to there
-        run: ./github/scripts/check-generated-files.sh foobar
+        run: .github/scripts/check-generated-files.sh foobar
         working-directory: ./foobar
 
       - name: Start up the server & Access it
