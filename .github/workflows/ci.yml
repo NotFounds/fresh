@@ -68,6 +68,10 @@ jobs:
       - name: Fresh Init
         run: fresh init foobar
 
+      - name: Debug
+        if: ${{ always() }}
+        uses: mxschmitt/action-tmate@v3
+
       - name: Check file generation & Move to there
         run: .github/scripts/check-generated-files.sh foobar
         working-directory: ./foobar
