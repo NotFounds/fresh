@@ -49,9 +49,8 @@ jobs:
 
     strategy:
       matrix:
-        #deno: ["v1.x", "canary"]
-        #os: [macOS-latest, windows-latest, ubuntu-latest]
-        os: [macOS-latest]
+        deno: ["v1.x", "canary"]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
       - name: Checkout repo
