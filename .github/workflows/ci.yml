@@ -68,16 +68,11 @@ jobs:
       - name: Fresh Init
         run: fresh init foobar
 
-      - name: Check file generation & Move to there
-        run: |
-          ls -a
-          pwd
-          ls -a .github
-          ls -a .github/scripts
-          .github/scripts/check-generated-files.sh foobar
-        working-directory: ./foobar
+      - name: Check file generation
+        run: .github/scripts/check-generated-files.sh foobar
 
       - name: Start up the server & Access it
+        working-directory: ./foobar
         run: |
           ./main.ts &
           curl localhost:8000 -o /dev/null -s
