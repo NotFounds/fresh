@@ -7,42 +7,42 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
+  #test:
+  #  runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        deno: ["v1.x", "canary"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
+  #  strategy:
+  #    matrix:
+  #      deno: ["v1.x", "canary"]
+  #      os: [macOS-latest, windows-latest, ubuntu-latest]
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+  #  steps:
+  #    - name: Checkout repo
+  #      uses: actions/checkout@v2
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v1
-        with:
-          deno-version: ${{ matrix.deno }}
+  #    - name: Setup Deno
+  #      uses: denoland/setup-deno@v1
+  #      with:
+  #        deno-version: ${{ matrix.deno }}
 
-      - name: Verify formatting
-        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
-        run: deno fmt --check
+  #    - name: Verify formatting
+  #      if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+  #      run: deno fmt --check
 
-      - name: Run linter
-        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
-        run: deno lint
+  #    - name: Run linter
+  #      if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+  #      run: deno lint
 
-      - name: Cache dependencies
-        run: deno cache --no-check src/cli/deps.ts src/runtime/deps.ts src/server/deps.ts
+  #    - name: Cache dependencies
+  #      run: deno cache --no-check src/cli/deps.ts src/runtime/deps.ts src/server/deps.ts
 
-      - name: Run tests
-        run: deno test -A --no-check=remote
+  #    - name: Run tests
+  #      run: deno test -A --no-check=remote
 
-      - name: Type check website
-        run: deno cache --no-check=remote www/main.ts
+  #    - name: Type check website
+  #      run: deno cache --no-check=remote www/main.ts
 
-      - name: Type check examples/counter
-        run: deno cache --no-check=remote examples/counter/main.ts
+  #    - name: Type check examples/counter
+  #      run: deno cache --no-check=remote examples/counter/main.ts
 
   integration-test:
     runs-on: ${{ matrix.os }}
@@ -53,6 +53,10 @@ jobs:
         os: [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
+      - name: Debug
+        if: ${{ always() }}
+        uses: mxschmitt/action-tmate@v3
+
       - name: Checkout repo
         uses: actions/checkout@v2
 
