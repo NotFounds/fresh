@@ -62,7 +62,7 @@ jobs:
         with:
           deno-version: ${{ matrix.deno }}
 
-      - name: Build Fresh
+      - name: Install Fresh
         run: deno install -A -f --no-check -n fresh -r ./cli.ts
 
       - name: Fresh Init
@@ -73,13 +73,18 @@ jobs:
         uses: mxschmitt/action-tmate@v3
 
       - name: Check file generation & Move to there
-        run: .github/scripts/check-generated-files.sh foobar
+        run: |
+          ls -a
+          pwd
+          ls -a .github
+          ls -a .github/scripts
+          .github/scripts/check-generated-files.sh foobar
         working-directory: ./foobar
 
       - name: Start up the server & Access it
         run: |
           ./main.ts &
-          curl localhost:8000
+          curl localhost:8000 -o /dev/null -s
 
       - name: Type check main.ts
         run: deno cache --no-check=remote main.ts
