@@ -114,5 +114,5 @@ Deno.test("fresh init", async (t) => {
   });
 
   // Cleanup
-  await Deno.remove(tmpDirName, { recursive: true });
+  //await Deno.remove(tmpDirName, { recursive: true });
 });
