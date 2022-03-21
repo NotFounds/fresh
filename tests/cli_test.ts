@@ -113,17 +113,6 @@ Deno.test("fresh init", async (t) => {
     serverProcess.close();
   });
 
-  await t.step("type check", async () => {
-    const typeCheckProcess = Deno.run({
-      cmd: ["deno", "cache", "--no-check=remote", "main.ts"],
-      stdout: "null",
-      stderr: "null",
-    });
-    const { code } = await typeCheckProcess.status();
-    typeCheckProcess.close();
-    assertEquals(code, 0);
-  });
-
   // Cleanup
   await Deno.remove(tmpDirName, { recursive: true });
 });
