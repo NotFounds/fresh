@@ -112,7 +112,4 @@ Deno.test("fresh init", async (t) => {
     serverProcess.kill("SIGTERM");
     serverProcess.close();
   });
-
-  // Cleanup
-  //await Deno.remove(tmpDirName, { recursive: true });
 });
