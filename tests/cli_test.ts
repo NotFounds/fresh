@@ -36,7 +36,7 @@ const waitForServer = async (port: number, retry = 5) => {
     const { code: lsofCode } = await lsof.status();
     lsof.close();
     if (lsofCode === 0) break;
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise((r) => setTimeout(r, 500));
   }
 };
 
